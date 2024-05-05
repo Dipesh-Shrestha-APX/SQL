@@ -1,0 +1,96 @@
+AGGREGATE FUNCTIONS PRACTICE
+
+
+-- Calculate the highest gross film released between 2000-2012
+SELECT MAX(gross) As highest_gross
+FROM films
+WHERE release_year BETWEEN 2000 AND 2012;
+
+
+-- Round the average number of facebook_likes to one decimal place
+SELECT ROUND(AVG(facebook_likes),1) AS avg_facebook_likes
+FROM reviews;
+
+
+
+-- Calculate the average budget rounded to the thousands
+SELECT ROUND(AVG(budget), -3) AS avg_budget_thousands
+FROM films;
+
+
+
+----------------------------------------------------------------
+-- Calculate the title and duration_hours from films
+SELECT title, (duration / 60.0) AS duration_hours
+FROM films;
+FROM films;
+
+-- Calculate the percentage of people who are no longer alive
+SELECT COUNT(deathdate) * 100.0 / COUNT(*) AS percentage_dead
+FROM people;
+
+-- Find the number of decades in the films table
+SELECT (MAX(release_year)-MIN(release_year)) / 10 AS number_of_decades
+FROM films;
+
+-- Round duration_hours to two decimal places
+SELECT title, ROUND(duration / 60.0, 2) AS duration_hours
+FROM films;
+
+
+-----------------------------------------------------------
+-- Select name from people and sort alphabetically
+SELECT name
+FROM people
+ORDER BY name;
+
+-- Select the title and duration from longest to shortest film
+SELECT title, duration
+FROM films
+ORDER BY duration DESC;
+
+-- Select the release year, duration, and title sorted by release year and duration
+SELECT release_year, duration, title
+FROM films
+ORDER BY release_year, duration;
+
+
+-- Select the certification, release year, and title sorted by certification and release year
+SELECT certification, release_year, title
+FROM films
+ORDER BY certification, release_year DESC;
+
+-----------------------------------------------------------
+
+-- Find the release_year and film_count of each year
+SELECT release_year,  COUNT(title) AS film_count
+FROM films
+GROUP BY release_year;
+
+-- Find the release_year and average duration of films for each year
+SELECT release_year, AVG(duration) AS avg_duration
+FROM films
+GROUP BY release_year;
+
+ANS))
+-- Find the release_year, country, and max_budget, then group and order by release_year and country
+SELECT release_year, country, MAX(budget) AS max_budget
+FROM films
+GROUP BY release_year, country
+ORDER BY release_year, country;
+
+
+
+
+Q))Answering business questions
+In the real world, every SQL query starts with a business question. Then it is up to you to decide how to write the query that answers the question. Let's try this out.
+Which release_year had the most language diversity?
+Take your time to translate this question into code. We'll get you started then it's up to you to test your queries in the console.
+"Most language diversity" can be interpreted as COUNT(DISTINCT ___). Now over to you.
+
+ANS))
+
+SELECT release_year, COUNT(DISTINCT(language)) AS language_count
+FROM films
+GROUP BY release_year
+ORDER BY language_count DESC;
